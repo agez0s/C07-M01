@@ -9,5 +9,5 @@ O jogador irá derrotar o monstro em 8 turnos.
 let vidaMonstro = +prompt("Digite a quantidade de vida do monstro (entre 10-50)");
 let valorAtaque = +prompt("Digite o valor do ataque do jogador, por turno (entre 5-10)");
 
-let numeroTurnos = vidaMonstro / valorAtaque;
+let numeroTurnos = Math.ceil(vidaMonstro / valorAtaque);
 console.log("Número de turnos para derrotar o monstro: " +numeroTurnos);
