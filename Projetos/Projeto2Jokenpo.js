@@ -14,16 +14,13 @@ vitórias de cada um (computador e jogador);
 • Perguntar se o Jogador quer jogar novamente, se sim inicie volte a escolha 
 de quantidade de rodadas, se não finalize o programa. */
 
+//declarando algumas variáveis
 
-//Nesse jogo, a PEDRA = 1, PAPEL = 2, TESOURA = 3
-//Declarando algumas variáveis
-let nome
-let rodadas
 let jogadaPC
 let jogadaUser
-let rodadasWin = 0
-let rodadasDraw = 0
-let rodadasLose = 0
+let rodadasWin = 0;
+let rodadasDraw = 0;
+let rodadasLose = 0;
 
 function JogadaComp() {
   let jogadaComp = Math.random();
@@ -33,29 +30,9 @@ function JogadaComp() {
   else if (jogadaComp < 0.66) {
     return 2;
   }
-  else { return 3};
-  
-}
-
-
-function IniciarJogo(deNovo) {
-  
-  if (deNovo === 1) {
-    console.log(`Olá! Vamos jogar novamente ${nome}!`)
-    rodadas = +prompt("Quantas rodadas você deseja jogar desta vez?");
-    rodadasWin = 0;
-    rodadasLose = 0
-    rodadasDraw = 0;
-
-  }
-  else {
-  nome = prompt(`Olá! Seja bem vindo. Qual o seu nome?`);
-  
-  rodadas = +prompt("Quantas rodadas você deseja jogar?")
-
-  }
-  console.log("Vamos começar!")
-  RodadaJogo();
+  else { 
+    return 3
+  };
 }
 
 function trataJogada(jogada) {
@@ -73,81 +50,101 @@ function trataJogada(jogada) {
   }
 }
 
+console.log("Projeto #2 - Jokenpô");
+console.log("====================");
+console.log();
+
+let nome = prompt("Bem vindo! Qual o seu nome?");
+let numRodadas = 0;
+
+
+function askRodadas(deNovo) {
+  if (deNovo === 1) {
+  numRodadas = +prompt("Vamos jogar novamente então! Quantas rodadas desta vez?")
+  }
+  else {
+    numRodadas = +prompt("Quantas rodadas você deseja jogar?")
+  }
+  if (isNaN(numRodadas)) {
+    console.log("Número de rodadas inválido!")
+    askRodadas();
+  }
+}
+
 function FimRodada(resultado) {
-  rodadas = rodadas - 1
   if (resultado == 1) {
-    console.log(`Você ganhou essa rodada! ${rodadas} rodadas restantes`);
+    console.log(`Você ganhou essa rodada!`);
     rodadasWin++
   }
   else if (resultado == 2) {
-    console.log(`Você perdeu essa rodada! ${rodadas} rodadas restantes`)
+    console.log(`Você perdeu essa rodada!`)
     rodadasLose++
   }
   else if (resultado == 3) {
-    console.log(`Empate! ${rodadas} rodadas restantes`)
+    console.log(`Empate!`)
     rodadasDraw++
   }
-  RodadaJogo();
-  
+  console.log()
 }
-
-function RodadaJogo() {
-   
-   if (rodadas > 0) {
-   
+function mainJogo(deNovo) {
+  if (deNovo === 1) {
+    askRodadas(1);
+  }
+  else { 
+    askRodadas();
+  }
+  for (let i = 1; i<=numRodadas; i++) {
     jogadaPC = JogadaComp();
-    jogadaUser = prompt(`Escolha pedra, papel ou tesoura:`)
+    jogadaUser = prompt(`Escolha pedra, papel ou tesoura:`);
     let jogada = trataJogada(jogadaUser);
     if (jogada == 1) {
      console.log(`Você escolheu: Pedra`)
      if (jogadaPC == 1) {
-      console.log(`Eu escolhi: Pedra!`)
+      console.log(`Eu escolhi: Pedra`)
       FimRodada(3);
      }
      else if (jogadaPC == 2) {
-     console.log(`Eu escolhi: Papel!`)
+     console.log(`Eu escolhi: Papel :)`)
      FimRodada(2)
      }
      else if (jogadaPC == 3) {
-     console.log(`Eu escolhi: Tesoura!`)
+     console.log(`Eu escolhi: Tesoura :(`)
      FimRodada(1)
-   }
-  }
+     }
+    }
     else if (jogada == 2) {
     console.log(`Você escolheu: Papel`)
      if (jogadaPC == 1) {
-      console.log(`Eu escolhi: Pedra!`)
+      console.log(`Eu escolhi: Pedra :(`)
       FimRodada(1);
      }
      else if (jogadaPC == 2) {
-     console.log(`Eu escolhi: Papel!`)
+     console.log(`Eu escolhi: Papel`)
      FimRodada(3)
      }
      else if (jogadaPC == 3) {
-     console.log(`Eu escolhi: Tesoura!`)
+     console.log(`Eu escolhi: Tesoura :)`)
      FimRodada(2)
-   }
-  }
-  else if (jogada == 3) {
+     }
+    }
+    else if (jogada == 3) {
     console.log(`Você escolheu: Tesoura`)
      if (jogadaPC == 1) {
-      console.log(`Eu escolhi: Pedra!`)
+      console.log(`Eu escolhi: Pedra :)`)
       FimRodada(2);
      }
      else if (jogadaPC == 2) {
-     console.log(`Eu escolhi: Papel!`)
+     console.log(`Eu escolhi: Papel :(`)
      FimRodada(1)
      }
      else if (jogadaPC == 3) {
-     console.log(`Eu escolhi: Tesoura!`)
-     FimRodada(3)
+     console.log(`Eu escolhi: Tesoura`);
+     FimRodada(3);
      }
     }
-
+    console.log(`${numRodadas-i} rodadas restantes!`);
   }
-  else {
-    FinalizaJogo();
-  }
+  FinalizaJogo();
 }
 
 function FinalizaJogo() {
@@ -158,13 +155,14 @@ function FinalizaJogo() {
   console.log(`Empates: ${rodadasDraw}`)
   let reiniciar = prompt("Deseja jogar novamente?") 
   if ((reiniciar.toLowerCase() == "sim")) {
-    IniciarJogo(1)
+    rodadasWin = 0;
+    rodadasLose= 0;
+    rodadasDraw = 0;
+    mainJogo(1)
   }
   else {
-    console.log("Até a próxima!")
+    console.log("Então até a próxima!")
   }
 }
 
-
-
-IniciarJogo();
+mainJogo()
