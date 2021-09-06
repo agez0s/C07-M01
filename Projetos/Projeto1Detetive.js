@@ -9,7 +9,9 @@ O programa deve no final emitir uma classificação sobre a participação da pe
 Se a pessoa responder positivamente a 2 questões ela deve ser classificada como Suspeita, entre 3 e 4 como Cúmplice e 5 como Assassino. Caso contrário, ele será classificado como Inocente. */
 
 
+
 // declarando algumas variáveis e funções
+const prompt = require('prompt-sync')({sigint: true});
 let classificacao;
 let respostas = 0;
 
