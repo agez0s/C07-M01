@@ -1,0 +1,3 @@
+// Exercício 3 - Letra de música - Faça um programa que mostre na tela uma letra de música que você gosta (proibido letras do Justin Bieber).
+
+console.log("Tudo que se faz só faz sentido\nSe vivermos em paz com o mundo\nE termos um ao outro como amigo\n\nComo numa estória de amor\nQue se passou na primavera\nQue encontrou a união\n\nTenha coragem, o sorriso é a porta da razão\nO amor vai durar três eternidades\nRoma vai vira no seu pensamento");
